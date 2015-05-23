@@ -1,12 +1,28 @@
-## Put comments here that give an overall description of what your
-## functions do
 ## The R script contains two functions, "makeCacheMatrix" and "cacheSolve"
 ## Function "makeCacheMatrix" creates a special "matrix" object that can cache its inverse.
 ## Function "cacheSolve" This function computes the inverse of the special "matrix" returned 
 ## by makeCacheMatrix above. If the inverse has already been calculated (and the matrix has not changed), 
 ## then cacheSolve should retrieve the inverse from the cache.
+## 
+## A simple example:
+##   x<-matrix(1:4, nrow=2, ncol=2); invs<-solve(x)
+##   xx1<-makeCacheMatrix()
+##   xx1$set(x)
+##   xx1$get()
+##   cacheSolve(xx1)   # no cached inverse
+##   xx1$setinverse(invs)
+##   xx1$getinverse()
+##   cacheSolve(xx1)   # cached inverse and matrix has not changed
+##   xnew<-matrix(c(1:3,4.01), nrow=2, ncol=2)  # new matrix x, but invs keeps same
+##   xx1<-makeCacheMatrix()
+##   xx1$set(xnew)
+##   xx1$get()
+##   cacheSolve(xx1)   # no cached inverse
+##   xx1$setinverse(invs)
+##   xx1$getinverse()
+##   cacheSolve(xx1)   # cached inverse but matrix has changed, so the inverse has to be re-calculated
+##
 
-## Write a short comment describing this function
 ## This function creates a special "matrix" object that can cache its inverse
 ## It contains a list of functions
 ## 1. "set": set the value of the matrix
@@ -16,7 +32,7 @@
 
 
 makeCacheMatrix <- function(x = matrix()) {
-  invs <- NULL
+  invs <- NULL # inverse of matrix
   set <- function(y) {
     x <<- y
     invs <<- NULL
@@ -30,7 +46,6 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
 ## This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. 
 ## If the inverse has already been calculated (and the matrix has not changed), then the cachesolve should retrieve the inverse from the cache.
 
