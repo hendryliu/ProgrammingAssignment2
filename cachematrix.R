@@ -37,9 +37,14 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
   ## Return a matrix that is the inverse of 'x'
   invs <- x$getinverse()
-  if(!is.null(invs) & ) {
-    message("getting cached inverse")
-    return(invs)
+  if(!is.null(invs)) {
+    # if the inverse has been cached, check whether inverse corresponds to matrix x (i.e. whether matrix has changed)
+    if(dim(invs) == dim(x$get()) && all(invs %*% x$get() == diag(dim(invs)[1]))) {
+      message("getting cached inverse")
+      return(invs)  
+    } else {
+      message("matrix has changed! re-caculate the inverse...")
+    }  
   }
   data <- x$get()
   invs <- solve(data, ...)
