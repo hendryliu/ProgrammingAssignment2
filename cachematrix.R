@@ -1,13 +1,18 @@
 ## Put comments here that give an overall description of what your
 ## functions do
+## The R script contains two functions, "makeCacheMatrix" and "cacheSolve"
+## Function "makeCacheMatrix" creates a special "matrix" object that can cache its inverse.
+## Function "cacheSolve" This function computes the inverse of the special "matrix" returned 
+## by makeCacheMatrix above. If the inverse has already been calculated (and the matrix has not changed), 
+## then cacheSolve should retrieve the inverse from the cache.
 
 ## Write a short comment describing this function
 ## This function creates a special "matrix" object that can cache its inverse
 ## It contains a list of functions
-## 1. set the value of the matrix
-## 2. get the value of the matrix
-## 3. set the inverse of the matrix
-## 4. get the inverse of the mean
+## 1. "set": set the value of the matrix
+## 2. "get": get the value of the matrix
+## 3. "setinverse": set the inverse of the matrix
+## 4. "getinverse": get the inverse of the mean
 
 
 makeCacheMatrix <- function(x = matrix()) {
@@ -32,7 +37,7 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
   ## Return a matrix that is the inverse of 'x'
   invs <- x$getinverse()
-  if(!is.null(invs)) {
+  if(!is.null(invs) & ) {
     message("getting cached inverse")
     return(invs)
   }
